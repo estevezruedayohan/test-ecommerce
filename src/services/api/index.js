@@ -28,7 +28,7 @@ const endPoints = {
   },
   files:{
     getFile: (fileName) => `${API}/api/${VERSION}/files/${fileName}`,
-
+    uploadFile: `${API}/api/${VERSION}/files/upload`,
   },
 };
 
