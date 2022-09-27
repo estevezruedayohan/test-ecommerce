@@ -10,25 +10,25 @@ const endPoints = {
   products:{
     listProducts: (limit, offset) => `${API}/api/${VERSION}/products?limit=${limit}&offset=${offset}`,
     getProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
-    // addProduct: (product) => `${API}/api/${VERSION}/products`,
-    updateProducto: (id) => `${API}/api/${VERSION}/products/${id}`,
-    deleteProducto: (id) => `${API}/api/${VERSION}/products/${id}`,
+    addProduct: `${API}/api/${VERSION}/products`,
+    updateProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
+    deleteProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
   },
   users:{
     getUsers: (limit) => `${API}/api/${VERSION}/users?limit=${limit}`,
-    // createUser: (user) => `${API}/api/${VERSION}/users`,
-    // doExist: (email) => `${API}/api/${VERSION}/users/is-available`,
+    createUser: `${API}/api/${VERSION}/users`,
+    isExistUser: `${API}/api/${VERSION}/users/is-available`,
   },
   categories:{
     listCategories: (limit) => `${API}/api/${VERSION}/categories?limit=${limit}`,
-    // addCategorie: (categorie) => `${API}/api/${VERSION}/categories`,
+    addCategorie: `${API}/api/${VERSION}/categories/`,
     getCategorie: (id) => `${API}/api/${VERSION}/categories/${id}`,
     updateCategorie: (id) => `${API}/api/${VERSION}/categories/${id}`,
-    // filterProductByCategorie: (idCat,limit,offset) => `${API}/api/${VERSION}/categories/${idCat}/products?limit=${limit}?offset=${offset}`,
+    getProductByCategorie: (idCat,limit,offset) => `${API}/api/${VERSION}/categories/${idCat}/products?limit=${limit}?offset=${offset}`,
   },
   files:{
-    getFile: (fileName) => `${API}/api/${VERSION}/files/${fileName}`,
-    uploadFile: `${API}/api/${VERSION}/files/upload`,
+    getImage: (fileName) => `${API}/api/${VERSION}/files/${fileName}`,
+    addImage: `${API}/api/${VERSION}/files/upload`,
   },
 };
 
