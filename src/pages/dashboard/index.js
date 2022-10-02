@@ -1,25 +1,16 @@
 import Pagination from "@components/Pagination";
-import useFetch from "@hooks/useFetch";
+import { useState } from "react";
 import endPoints from "@services/api";
-
-const people = [
-  {
-    name: 'Jane Cooper',
-    title: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-];
+import useFetch from "@hooks/useFetch";
 
 const PRODUCT_LIMIT = 5;
-const PRODUCT_OFFSET = 5;
 
 export default function Dashboard() {
 
-  const products = useFetch(endPoints.products.listProducts(PRODUCT_LIMIT,PRODUCT_OFFSET));
-  console.log(products);
+  const [OFFSET_PRODUCTS, setOffSet] = useState(0);
+
+  const products = useFetch(endPoints.products.listProducts(PRODUCT_LIMIT, OFFSET_PRODUCTS));
+  const lengthProducts = useFetch(endPoints.products.listProducts(0, 0)).length;
 
   return (
     <>
@@ -60,14 +51,14 @@ export default function Dashboard() {
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">{product.title}</div>
-                            {/* <div className="text-sm text-gray-500">{product.}</div> */}
+                            {/* <div className="text-sm text-gray-500">{product}</div> */}
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{product.category.name}</div>
                         {/* <div className="text-sm text-gray-500">{product.category.id}</div> */}
-                      </td>
+                      </td> 
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">$ {product.price}</span>
                       </td>
@@ -90,7 +81,12 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      <Pagination />
+      { lengthProducts > 0 && <Pagination
+        itemsPerPage = {PRODUCT_LIMIT}
+        lengthProducts={lengthProducts}
+        // page={1} 
+        setOffSet={setOffSet}
+        />}
     </>
-  );
+  )
 }

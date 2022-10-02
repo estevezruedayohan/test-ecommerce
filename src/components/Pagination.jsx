@@ -1,24 +1,55 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { useState } from 'react';
 
-export default function Pagination() {
+const Pagination =  ({ itemsPerPage, lengthProducts, setOffSet }) => {
+
+  const [page, setPage] = useState(1);
+  const totalPage = Math.ceil(lengthProducts / itemsPerPage); 
+  
+  const handlePreviousPage = () => {
+    if (page >= 1) {
+      setPage(page - 1);
+      setOffSet(page * itemsPerPage);
+    }
+  };
+
+  const handleNextPage = () => {
+    if(page < totalPage){
+      setPage(page + 1);
+      setOffSet(page * itemsPerPage);
+    }
+  };
+
   return (
     <>
-      <div className="flex items-center justify-center border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-        <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-          <a
-            href="#"
-            className="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      <div className="flex flex-col items-center">
+        <span className="text-sm text-gray-700 dark:text-gray-400">
+          Showing <span className="font-semibold text-gray-900 dark:text-white">{ itemsPerPage * (page - 1) + 1}</span> to <span className="font-semibold text-gray-900 dark:text-white">{ page * itemsPerPage < lengthProducts ? page * itemsPerPage : lengthProducts}</span> of{' '}
+          <span className="font-semibold text-gray-900 dark:text-white">{lengthProducts}</span> Entries
+        </span>
+        <div className="inline-flex mt-2 xs:mt-0">
+          <button
+            type="button"
+            disabled={page === 1 ? true : false}
+            className={`py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-l hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white 
+            ${page === 1 && 'opacity-60'}`}
+            onClick={handlePreviousPage}
           >
-            Previous
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center py-2 px-4 ml-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            Prev
+          </button>
+
+          <button
+            type="button"
+            disabled={page * itemsPerPage >= lengthProducts ? true : false}
+            className={`py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-r border-0 border-l border-gray-700 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
+            ${ page * itemsPerPage >= lengthProducts && 'opacity-60'}`}
+            onClick={handleNextPage}
           >
             Next
-          </a>
+          </button>
         </div>
       </div>
     </>
   );
 }
+
+export default Pagination;

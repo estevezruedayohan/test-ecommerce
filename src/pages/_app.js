@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
     <>
     <ProviderAuth>
       <MainLayout>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </MainLayout>
     </ProviderAuth>
     </>
