@@ -8,7 +8,7 @@ export const Chart = ({ chartData }) => {
     <>
       <Bar 
         data= {chartData}
-        options={
+        options={{
           title: {
             display: true,
             text: 'Category',
@@ -18,10 +18,8 @@ export const Chart = ({ chartData }) => {
             display: true,
             position: 'right'
           }, 
-        }
-        >
-
-      </Bar>
+        }}
+        />
     </>
   );
 }
