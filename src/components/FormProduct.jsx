@@ -1,12 +1,15 @@
 import { useRef } from 'react';
-import { addProduct } from '@services/api/product';
+import { addProduct, updateProduct } from '@services/api/product';
+import { useRouter } from 'next/router';
 
 export default function FormProduct({ setOpen, setAlert, product }) {
   const formRef = useRef(null);
+  const router = useRouter();
   
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(formRef.current);
+    
     const data = {
       title: formData.get('title'),
       price: parseInt(formData.get('price')),
@@ -14,24 +17,41 @@ export default function FormProduct({ setOpen, setAlert, product }) {
       categoryId: parseInt(formData.get('category')),
       images: [formData.get('images').name],
     };
-    addProduct(data)
-      .then(() => {
-        setAlert({
-          active: true,
-          message: 'Product addes succeessfully',
-          type: 'success',
-          autoClose: false,
+
+    if(product){
+      updateProduct(product.id, data)
+        .then(() => {
+          router.push('/dashboard/products/');
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: error.message,
+            type: 'error',
+            autoClose: false
+          });
         });
-        setOpen(false);
-      })
-      .catch((error) => {
-        setAlert({
-          active: true,
-          message: error.message,
-          type: 'error',
-          autoClose: false
+    }else{
+      addProduct(data)
+        .then(() => {
+          setAlert({
+            active: true,
+            message: 'Product added succeessfully',
+            type: 'success',
+            autoClose: false,
+          });
+          setOpen(false);
+        })
+        .catch((error) => {
+          setAlert({
+            active: true,
+            message: error.message,
+            type: 'error',
+            autoClose: false
+          });
         });
-      });
+    }
+
   };
 
   return (
