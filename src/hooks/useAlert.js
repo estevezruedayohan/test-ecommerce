@@ -21,7 +21,7 @@ const useAlert = (options) => {
     alert,
     setAlert,
     toggleAlert,
-  }
+  };
 };
 
 export default useAlert;

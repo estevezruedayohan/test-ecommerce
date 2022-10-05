@@ -104,5 +104,5 @@ export default function Dashboard() {
         setOffSet={setOffSet}
         />}
     </>
-  )
+  );
 }

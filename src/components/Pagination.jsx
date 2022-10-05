@@ -50,6 +50,6 @@ const Pagination =  ({ itemsPerPage, lengthProducts, setOffSet }) => {
       </div>
     </>
   );
-}
+};
 
 export default Pagination;

@@ -22,7 +22,7 @@ export default function Products() {
     try {
       getProducts();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }, [alert]);
 
@@ -37,7 +37,7 @@ export default function Products() {
     }).catch((error) => {
       setAlert({
         active: true,
-        message: 'Product Not found',
+        message: `Product Not found. Error: ${error}`,
         type: 'error',
         autoClose: false
       });
@@ -140,4 +140,4 @@ export default function Products() {
       </Modal>
     </>
   );
-}
+};
