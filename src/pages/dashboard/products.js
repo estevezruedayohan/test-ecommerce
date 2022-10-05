@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { PlusIcon } from '@heroicons/react/20/solid';
+import { PlusIcon, XCircleIcon } from '@heroicons/react/20/solid';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FormProduct';
 import axios from 'axios';
 import endPoints from '@services/api';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/alert';
+import { deleteProduct } from '@services/api/product';
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,24 @@ export default function Products() {
       console.log(error)
     }
   }, [alert]);
+
+  const handleClose = (id) => {
+    deleteProduct(id).then(() => {
+      setAlert({
+        active: true,
+        message: 'Delete product Successfully',
+        type: 'error',
+        autoClose: true,
+      });
+    }).catch((error) => {
+      setAlert({
+        active: true,
+        message: 'Product Not found',
+        type: 'error',
+        autoClose: false
+      });
+    });
+  };
 
   return (
     <>
@@ -101,9 +120,10 @@ export default function Products() {
                         </a>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
-                        </a>
+                        <XCircleIcon className='flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer'  
+                          aria-hidden="hidden"
+                          onClick={() => handleClose(product.id)}
+                        />
                       </td>
                     </tr>
                   ))}
@@ -113,14 +133,7 @@ export default function Products() {
           </div>
         </div>
       </div>
-      {/* {lengthProducts > 0 && (
-        <Pagination
-          itemsPerPage={PRODUCT_LIMIT}
-          lengthProducts={lengthProducts}
-          // page={1}
-          setOffSet={setOffSet}
-        />
-      )} */}
+      
       <Modal open={open} setOpen={setOpen}>
         <FormProduct setOpen={setOpen} setAlert= {setAlert}/>
       </Modal>
