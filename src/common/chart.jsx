@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJs.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, LineElement);
 
-const Chart = ({ chartData }) => {
+export const Chart = ({ chartData }) => {
   return(
     <>
       <Bar 
@@ -23,5 +23,3 @@ const Chart = ({ chartData }) => {
     </>
   );
 };
-
-export default Chart;
