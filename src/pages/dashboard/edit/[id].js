@@ -20,6 +20,8 @@ export default function Edit(){
   }, [router?.isReady]);
 
   return (
-    <FormProduct product={product}/>
+    <>
+      <FormProduct product={product}/>
+    </>
   );
 };

@@ -48,5 +48,11 @@ function useProvideAuth(){
 
 export function ProviderAuth({ children }){
   const auth = useProvideAuth();
-  return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
+  return (
+    <>
+      <AuthContext.Provider value={auth}>
+        {children}
+      </AuthContext.Provider>;
+    </>
+  ); 
 };
