@@ -5,7 +5,7 @@ import FormProduct from '@components/FormProduct';
 import axios from 'axios';
 import endPoints from '@services/api';
 import useAlert from '@hooks/useAlert';
-import Alert from '@common/alert';
+import Alert from '@common/Alert';
 import { deleteProduct } from '@services/api/product';
 import Link from 'next/link';
 
