@@ -13,19 +13,23 @@ export default function Dashboard() {
   const products = useFetch(endPoints.products.listProducts(PRODUCT_LIMIT, OFFSET_PRODUCTS));
   const lengthProducts = useFetch(endPoints.products.listProducts(0, 0)).length;
 
-  // const categoryNames = products?.map((product) => product.category);
-  // const categoryCount = categoryNames?.map((category) => category.name);
+  const categoryNames = products?.map((product) => product.category);
+  const categoryCount = categoryNames?.map((category) => category.name);
 
-  // const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {}); 
+  const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {}); 
 
-  // const data = {
-  //   datasets: [{
-  //     label: 'Categories',
-  //     data: countOccurrences(categoryCount),
-  //     borderWidth: 2,
-  //     backgroundColor: ['#ffbb11', '"c0c0c0', '#50AF95', '#f3ba2f', '#2a71d0'],
-  //   }],
-  // };
+  console.log(categoryCount);
+  console.log(countOccurrences);
+
+  const data = {
+    datasets: [{
+      label: 'Categories',
+      data: countOccurrences(categoryCount),
+      borderWidth: 2,
+      backgroundColor: ['#ffbb11', '"c0c0c0', '#50AF95', '#f3ba2f', '#2a71d0'],
+    }],
+  };
+  console.log(data);
 
   return (
     <>
