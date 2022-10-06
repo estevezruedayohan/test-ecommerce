@@ -2,7 +2,7 @@ import Pagination from '@components/Pagination';
 import { useState } from 'react';
 import endPoints from '@services/api';
 import useFetch from '@hooks/useFetch';
-import { Chart } from '../../common/chart'; 
+// import { Chart } from '@common/chart'; 
 
 const PRODUCT_LIMIT = 0;
 
@@ -13,23 +13,23 @@ export default function Dashboard() {
   const products = useFetch(endPoints.products.listProducts(PRODUCT_LIMIT, OFFSET_PRODUCTS));
   const lengthProducts = useFetch(endPoints.products.listProducts(0, 0)).length;
 
-  const categoryNames = products?.map((product) => product.category);
-  const categoryCount = categoryNames?.map((category) => category.name);
+  // const categoryNames = products?.map((product) => product.category);
+  // const categoryCount = categoryNames?.map((category) => category.name);
 
-  const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {}); 
+  // const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {}); 
 
-  const data = {
-    datasets: [{
-      label: 'Categories',
-      data: countOccurrences(categoryCount),
-      borderWidth: 2,
-      backgroundColor: ['#ffbb11', '"c0c0c0', '#50AF95', '#f3ba2f', '#2a71d0'],
-    }],
-  };
+  // const data = {
+  //   datasets: [{
+  //     label: 'Categories',
+  //     data: countOccurrences(categoryCount),
+  //     borderWidth: 2,
+  //     backgroundColor: ['#ffbb11', '"c0c0c0', '#50AF95', '#f3ba2f', '#2a71d0'],
+  //   }],
+  // };
 
   return (
     <>
-      <Chart className='mb-8 mt-2' chartData={data} />
+      {/* <Chart className='mb-8 mt-2' chartData={data} /> */}
       <div className='flex flex-col'>
         <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
