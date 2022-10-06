@@ -2,7 +2,7 @@ import Pagination from '@components/Pagination';
 import { useState } from 'react';
 import endPoints from '@services/api';
 import useFetch from '@hooks/useFetch';
-import { Chart } from '@common/Chart'; 
+import Chart from '@common/Chart'; 
 
 const PRODUCT_LIMIT = 0;
 
